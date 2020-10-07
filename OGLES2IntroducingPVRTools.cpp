@@ -16,6 +16,7 @@
 ******************************************************************************/
 #include "PVRShell.h"
 #include "OGLES2Tools.h"
+#include "Print2D.h"
 #include <iostream>
 
 /******************************************************************************
@@ -352,6 +353,9 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 
 
 	m_Print3D.Print3D(xRelativePosition, yRelativePosition, 1.0f, 0xFFFFFFFF, "example");
+
+	Print2D print2D = Print2D();
+	std::cout << print2D.test() << "\n";
 	
 
 	// Tells Print3D to do all the pending text rendering now
