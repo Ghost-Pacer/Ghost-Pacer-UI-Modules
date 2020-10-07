@@ -16,6 +16,7 @@
 ******************************************************************************/
 #include "PVRShell.h"
 #include "OGLES2Tools.h"
+#include <iostream>
 
 /******************************************************************************
  shader attributes and uniforms
@@ -315,6 +316,9 @@ bool OGLES2IntroducingPVRTools::ReleaseView()
 ******************************************************************************/
 bool OGLES2IntroducingPVRTools::RenderScene()
 {
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
+	freopen("CONOUT$", "w", stderr);
 	/*
 		Display some text.
 		Print3D() function allows to draw text anywhere on the screen using any color.
@@ -324,7 +328,14 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 		Param 4: Colour of the text (0xAABBGGRR format)
 		Param 5: Formatted string (uses the same syntax as printf)
 	*/
-	m_Print3D.Print3D(8.0f, 30.0f, 1.0f, 0xFFFFFFFF, "example");
+	m_Print3D.Print3D(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "example");
+	float* width = new float(50.0);
+	float* height = new float(50.0);
+	std::cout << *width << " ";
+	std::cout << *height << std::endl;
+	m_Print3D.MeasureText(width, height, 1.0f, "example");
+	std::cout << *width << " ";
+	std::cout << *height << std::endl;
 
 	// Tells Print3D to do all the pending text rendering now
 	m_Print3D.Flush();
