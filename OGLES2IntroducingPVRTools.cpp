@@ -315,50 +315,6 @@ bool OGLES2IntroducingPVRTools::ReleaseView()
 ******************************************************************************/
 bool OGLES2IntroducingPVRTools::RenderScene()
 {
-	// Clears the color and depth buffer
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Binds the loaded texture
-	glBindTexture(GL_TEXTURE_2D, m_uiTexture);
-
-	// Use the loaded shader program
-	glUseProgram(m_ShaderProgram.uiId);
-
-	/*
-		Creates the Model View Projection (MVP) matrix using the PVRTMat4 class from the tools.
-		The tools contain a complete set of functions to operate on 4x4 matrices.
-	*/
-	PVRTMat4 mMVP = PVRTMat4::Identity();
-
-	if(PVRShellGet(prefIsRotated) && PVRShellGet(prefFullScreen)) // If the screen is rotated
-		mMVP = PVRTMat4::RotationZ(-1.57f);
-
-	/*
-		Pass this matrix to the shader.
-		The .m field of a PVRTMat4 contains the array of float used to
-		communicate with OpenGL ES.
-	*/
-	glUniformMatrix4fv(m_ShaderProgram.auiLoc[eMVPMatrix], 1, GL_FALSE, mMVP.ptr());
-
-	/*
-		Draw a triangle.
-		Please refer to the training course IntroducingPVRShell for a detailed explanation.
-	*/
-
-	// Bind the VBO
-	glBindBuffer(GL_ARRAY_BUFFER, m_ui32Vbo);
-
-	// Pass the vertex data
-	glEnableVertexAttribArray(VERTEX_ARRAY);
-	glVertexAttribPointer(VERTEX_ARRAY, 3, GL_FLOAT, GL_FALSE, m_ui32VertexStride, 0);
-
-	// Pass the texture coordinates data
-	glEnableVertexAttribArray(TEXCOORD_ARRAY);
-	glVertexAttribPointer(TEXCOORD_ARRAY, 2, GL_FLOAT, GL_FALSE, m_ui32VertexStride, (void*) (sizeof(GLfloat) * 3) /* Uvs start after the position */);
-
-	// Draws a non-indexed triangle array
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-
 	/*
 		Display some text.
 		Print3D() function allows to draw text anywhere on the screen using any color.
@@ -368,14 +324,7 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 		Param 4: Colour of the text (0xAABBGGRR format)
 		Param 5: Formatted string (uses the same syntax as printf)
 	*/
-	m_Print3D.Print3D(8.0f, 30.0f, 1.0f, 0xFFAA4040, "example");
-
-	/*
-		DisplayDefaultTitle() writes a title and description text on the top left of the screen.
-		It can also display the PVR logo (ePVRTPrint3DLogoPVR), the IMG logo (ePVRTPrint3DLogoIMG) or both (ePVRTPrint3DLogoPVR | ePVRTPrint3DLogoIMG).
-		Set this last parameter to NULL not to display the logos.
-	*/
-	m_Print3D.DisplayDefaultTitle("IntroducingPVRTools", "Description", ePVRTPrint3DSDKLogo);
+	m_Print3D.Print3D(8.0f, 30.0f, 1.0f, 0xFFFFFFFF, "example");
 
 	// Tells Print3D to do all the pending text rendering now
 	m_Print3D.Flush();
