@@ -328,14 +328,31 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 		Param 4: Colour of the text (0xAABBGGRR format)
 		Param 5: Formatted string (uses the same syntax as printf)
 	*/
-	m_Print3D.Print3D(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "example");
-	float* width = new float(50.0);
-	float* height = new float(50.0);
+	float xOriginRelativePosition = 50.0;
+	float yOriginRelativePosition = 50.0;
+	
+	float* width = new float();
+	float* height = new float();
+	m_Print3D.MeasureText(width, height, 1.0f, "hello world");
 	std::cout << *width << " ";
 	std::cout << *height << std::endl;
-	m_Print3D.MeasureText(width, height, 1.0f, "example");
-	std::cout << *width << " ";
-	std::cout << *height << std::endl;
+
+	float screenWidth = 720;
+	float screenHeight = 1280;
+
+	float xOriginAbsolutePosition = screenWidth * xOriginRelativePosition / 100;
+	float yOriginAbsolutePosition = screenHeight * yOriginRelativePosition / 100;
+
+	float xAbsolutePosition = xOriginAbsolutePosition - *width / 2;
+	float yAbsolutePosition = yOriginAbsolutePosition - *height / 2;
+
+
+	float xRelativePosition = xAbsolutePosition / screenWidth * 100;
+	float yRelativePosition = yAbsolutePosition / screenHeight * 100;
+
+
+	m_Print3D.Print3D(xRelativePosition, yRelativePosition, 1.0f, 0xFFFFFFFF, "example");
+	
 
 	// Tells Print3D to do all the pending text rendering now
 	m_Print3D.Flush();
