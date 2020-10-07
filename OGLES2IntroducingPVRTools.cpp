@@ -320,43 +320,11 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 	AllocConsole();
 	freopen("CONOUT$", "w", stdout);
 	freopen("CONOUT$", "w", stderr);
-	/*
-		Display some text.
-		Print3D() function allows to draw text anywhere on the screen using any color.
-		Param 1: Position of the text along X (from 0 to 100 scale independent)
-		Param 2: Position of the text along Y (from 0 to 100 scale independent)
-		Param 3: Scale of the text
-		Param 4: Colour of the text (0xAABBGGRR format)
-		Param 5: Formatted string (uses the same syntax as printf)
-	*/
-	float xOriginRelativePosition = 50.0;
-	float yOriginRelativePosition = 50.0;
-	
-	float* width = new float();
-	float* height = new float();
-	m_Print3D.MeasureText(width, height, 1.0f, "hello world");
-	std::cout << *width << " ";
-	std::cout << *height << std::endl;
 
-	float screenWidth = 720;
-	float screenHeight = 1280;
+	Print2D print2D = Print2D(&m_Print3D);
+	print2D.renderText(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "default text rendering");
+	print2D.renderTextAtOrigin(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
 
-	float xOriginAbsolutePosition = screenWidth * xOriginRelativePosition / 100;
-	float yOriginAbsolutePosition = screenHeight * yOriginRelativePosition / 100;
-
-	float xAbsolutePosition = xOriginAbsolutePosition - *width / 2;
-	float yAbsolutePosition = yOriginAbsolutePosition - *height / 2;
-
-
-	float xRelativePosition = xAbsolutePosition / screenWidth * 100;
-	float yRelativePosition = yAbsolutePosition / screenHeight * 100;
-
-
-	m_Print3D.Print3D(xRelativePosition, yRelativePosition, 1.0f, 0xFFFFFFFF, "example");
-
-	Print2D print2D = Print2D();
-	std::cout << print2D.test() << "\n";
-	
 
 	// Tells Print3D to do all the pending text rendering now
 	m_Print3D.Flush();
