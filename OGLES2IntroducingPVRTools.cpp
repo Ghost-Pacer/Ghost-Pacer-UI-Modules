@@ -18,6 +18,7 @@
 #include "OGLES2Tools.h"
 #include "Print2D.h"
 #include <iostream>
+#include <vector>
 
 /******************************************************************************
  shader attributes and uniforms
@@ -322,8 +323,13 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 	freopen("CONOUT$", "w", stderr);
 
 	Print2D print2D = Print2D(&m_Print3D);
-	print2D.renderText(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "default text rendering");
-	print2D.renderTextCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
+	//print2D.renderTextCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
+	std::vector<char*> menuItems;
+	menuItems.push_back("hello");
+	menuItems.push_back("world");
+	menuItems.push_back("!!!!!");
+	menuItems.push_back("Wow this really works!!!!");
+	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, 1, menuItems);
 
 
 	// Tells Print3D to do all the pending text rendering now
