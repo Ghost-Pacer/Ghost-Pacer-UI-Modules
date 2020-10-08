@@ -318,18 +318,19 @@ bool OGLES2IntroducingPVRTools::ReleaseView()
 ******************************************************************************/
 bool OGLES2IntroducingPVRTools::RenderScene()
 {
-	AllocConsole();
-	freopen("CONOUT$", "w", stdout);
-	freopen("CONOUT$", "w", stderr);
+	//AllocConsole();
+	//freopen("CONOUT$", "w", stdout);
+	//freopen("CONOUT$", "w", stderr);
 
 	Print2D print2D = Print2D(&m_Print3D);
 	//print2D.renderTextCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
 	std::vector<char*> menuItems;
 	menuItems.push_back("hello");
 	menuItems.push_back("world");
-	menuItems.push_back("!!!!!");
-	menuItems.push_back("Wow this really works!!!!");
-	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, 1, menuItems);
+	menuItems.push_back("you can add as many items");
+	menuItems.push_back("as you want");
+	menuItems.push_back("and it will work!");
+	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 0.9f, 0xFFFFFFFF, 1, menuItems);
 
 
 	// Tells Print3D to do all the pending text rendering now
