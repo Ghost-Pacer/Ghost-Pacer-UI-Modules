@@ -323,7 +323,7 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 
 	Print2D print2D = Print2D(&m_Print3D);
 	print2D.renderText(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "default text rendering");
-	print2D.renderTextAtOrigin(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
+	print2D.renderTextCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
 
 
 	// Tells Print3D to do all the pending text rendering now
