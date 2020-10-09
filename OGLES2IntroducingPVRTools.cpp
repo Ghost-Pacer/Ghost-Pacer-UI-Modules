@@ -324,13 +324,35 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 
 	Print2D print2D = Print2D(&m_Print3D);
 	//print2D.renderTextCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
-	std::vector<char*> menuItems;
-	menuItems.push_back("hello");
-	menuItems.push_back("world");
-	menuItems.push_back("you can add as many items");
-	menuItems.push_back("as you want");
-	menuItems.push_back("and it will work!");
-	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 0.9f, 0xFFFFFFFF, 50, menuItems);
+
+	//std::vector<char*> menuItems;
+	//menuItems.push_back("hello");
+	//menuItems.push_back("world");
+	//menuItems.push_back("you can add as many items");
+	//menuItems.push_back("as you want");
+	//menuItems.push_back("and it will work!");
+	//print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 0.9f, 0xFFFFFFFF, 50, menuItems);
+
+	std::vector<Print2D::AttributedText> menuItems;
+	Print2D::AttributedText selectedMenuItem;
+	selectedMenuItem.color = 0xFFFF00FF;
+	selectedMenuItem.scale = 0.4f;
+	selectedMenuItem.text = "Selected Item";
+
+	Print2D::AttributedText unselectedMenuItem1;
+	unselectedMenuItem1.color = 0x99999999;
+	unselectedMenuItem1.scale = 0.4f;
+	unselectedMenuItem1.text = "Unselected Item";
+
+	Print2D::AttributedText unselectedMenuItem2;
+	unselectedMenuItem2.color = 0x99999999;
+	unselectedMenuItem2.scale = 0.9f;
+	unselectedMenuItem2.text = "Unselected Prominent Item";
+
+	menuItems.push_back(selectedMenuItem);
+	menuItems.push_back(unselectedMenuItem1);
+	menuItems.push_back(unselectedMenuItem2);
+	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 50, menuItems);
 
 
 	// Tells Print3D to do all the pending text rendering now
