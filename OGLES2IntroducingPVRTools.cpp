@@ -330,7 +330,7 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 	menuItems.push_back("you can add as many items");
 	menuItems.push_back("as you want");
 	menuItems.push_back("and it will work!");
-	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 0.9f, 0xFFFFFFFF, 1, menuItems);
+	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 0.9f, 0xFFFFFFFF, 50, menuItems);
 
 
 	// Tells Print3D to do all the pending text rendering now
