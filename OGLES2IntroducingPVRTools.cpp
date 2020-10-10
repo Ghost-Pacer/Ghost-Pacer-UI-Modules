@@ -17,6 +17,7 @@
 #include "PVRShell.h"
 #include "OGLES2Tools.h"
 #include "Print2D.h"
+#include "MenuController.h"
 #include <iostream>
 #include <vector>
 
@@ -57,6 +58,10 @@ class OGLES2IntroducingPVRTools : public PVRShell
 {
 	// Print3D class used to display text
 	CPVRTPrint3D	m_Print3D;
+
+	MenuController *menuController;
+
+	int counter = 0;
 
 	// Texture handle
 	GLuint	m_uiTexture;
@@ -278,6 +283,13 @@ bool OGLES2IntroducingPVRTools::InitView()
 
 	// Enable culling
 	glEnable(GL_CULL_FACE);
+
+	std::vector<char*> menuItemsText;
+	menuItemsText.push_back("option1");
+	menuItemsText.push_back("option2");
+	menuItemsText.push_back("option3");
+	menuController = new MenuController(menuItemsText, 50, 1.0f, 0xFFFF00FF, 0x99999999, &m_Print3D);
+
 	return true;
 }
 
@@ -303,6 +315,8 @@ bool OGLES2IntroducingPVRTools::ReleaseView()
 	glDeleteShader(m_uiVertexShader);
 	glDeleteShader(m_uiFragShader);
 
+	delete menuController;
+
 	return true;
 }
 
@@ -322,7 +336,7 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 	//freopen("CONOUT$", "w", stdout);
 	//freopen("CONOUT$", "w", stderr);
 
-	Print2D print2D = Print2D(&m_Print3D);
+	//Print2D print2D = Print2D(&m_Print3D);
 	//print2D.renderTextCenteredAt(50.0f, 50.0f, 1.0f, 0xFFFFFFFF, "adjusted text rendering");
 
 	//std::vector<char*> menuItems;
@@ -333,27 +347,30 @@ bool OGLES2IntroducingPVRTools::RenderScene()
 	//menuItems.push_back("and it will work!");
 	//print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 0.9f, 0xFFFFFFFF, 50, menuItems);
 
-	std::vector<Print2D::AttributedText> menuItems;
-	Print2D::AttributedText selectedMenuItem;
-	selectedMenuItem.color = 0xFFFF00FF;
-	selectedMenuItem.scale = 0.4f;
-	selectedMenuItem.text = "Selected Item";
+	//std::vector<Print2D::AttributedText> menuItems;
+	//Print2D::AttributedText selectedMenuItem;
+	//selectedMenuItem.color = 0xFFFF00FF;
+	//selectedMenuItem.scale = 0.4f;
+	//selectedMenuItem.text = "Selected Item";
 
-	Print2D::AttributedText unselectedMenuItem1;
-	unselectedMenuItem1.color = 0x99999999;
-	unselectedMenuItem1.scale = 0.4f;
-	unselectedMenuItem1.text = "Unselected Item";
+	//Print2D::AttributedText unselectedMenuItem1;
+	//unselectedMenuItem1.color = 0x99999999;
+	//unselectedMenuItem1.scale = 0.4f;
+	//unselectedMenuItem1.text = "Unselected Item";
 
-	Print2D::AttributedText unselectedMenuItem2;
-	unselectedMenuItem2.color = 0x99999999;
-	unselectedMenuItem2.scale = 0.9f;
-	unselectedMenuItem2.text = "Unselected Prominent Item";
+	//Print2D::AttributedText unselectedMenuItem2;
+	//unselectedMenuItem2.color = 0x99999999;
+	//unselectedMenuItem2.scale = 0.9f;
+	//unselectedMenuItem2.text = "Unselected Prominent Item";
 
-	menuItems.push_back(selectedMenuItem);
-	menuItems.push_back(unselectedMenuItem1);
-	menuItems.push_back(unselectedMenuItem2);
-	print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 50, menuItems);
+	//menuItems.push_back(selectedMenuItem);
+	//menuItems.push_back(unselectedMenuItem1);
+	//menuItems.push_back(unselectedMenuItem2);
+	//print2D.renderVerticalMenuCenteredAt(50.0f, 50.0f, 50, menuItems);
 
+	menuController->render();
+	if (counter % 25 == 0) { menuController->navigateDown(); }
+	counter++;
 
 	// Tells Print3D to do all the pending text rendering now
 	m_Print3D.Flush();
