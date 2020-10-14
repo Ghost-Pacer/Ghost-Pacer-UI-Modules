@@ -20,8 +20,8 @@ ButtonLegendController::~ButtonLegendController() {
 }
 
 void ButtonLegendController::render() {
-	const float X_RELATIVE_CENTER_COORDINATE = 85.0;
-	const float Y_RELATIVE_CENTER_COORDINATE = 85.0;
+	const float X_RELATIVE_CENTER_COORDINATE = 88.0;
+	const float Y_RELATIVE_CENTER_COORDINATE = 88.0;
 	print2D->renderVerticalMenuCenteredAt(X_RELATIVE_CENTER_COORDINATE, Y_RELATIVE_CENTER_COORDINATE, itemSpacing, legendItemsAttributedText);
 }
 
