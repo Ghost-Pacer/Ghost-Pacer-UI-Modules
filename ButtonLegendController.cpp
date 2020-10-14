@@ -23,6 +23,13 @@ void ButtonLegendController::render() {
 	print2D->renderVerticalMenuCenteredAt(X_RELATIVE_CENTER_COORDINATE, Y_RELATIVE_CENTER_COORDINATE, itemSpacing, legendItemsAttributedText);
 }
 
+void ButtonLegendController::setButtonIsEnabled(int buttonIndex, bool enabled) {
+	const int BUTTON_COUNT = 3;
+	if (buttonIndex < 0 || buttonIndex >= BUTTON_COUNT) { return; }
+
+	legendItemsAttributedText[buttonIndex].color = enabled ? selectedColorOfButton(buttonIndex) : UNSELECTED_COLOR;
+}
+
 // ***** HELPER FUNCTIONS ****
 char* ButtonLegendController::stringRepresentationOfButton(int buttonIndex) {
 	switch (buttonIndex) {
@@ -34,5 +41,18 @@ char* ButtonLegendController::stringRepresentationOfButton(int buttonIndex) {
 		return const_cast<char*>(OK_BUTTON);
 	default:
 		return "\0";
+	}
+}
+
+unsigned int ButtonLegendController::selectedColorOfButton(int buttonIndex) {
+	switch (buttonIndex) {
+	case 0:
+		return UP_BUTTON_SELECTED_COLOR;
+	case 1:
+		return DOWN_BUTTON_SELECTED_COLOR;
+	case 2:
+		return OK_BUTTON_SELECTED_COLOR;
+	default:
+		return UNSELECTED_COLOR;
 	}
 }

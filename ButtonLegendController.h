@@ -26,6 +26,7 @@ private:
 	Print2D *print2D;
 
 	char* stringRepresentationOfButton(int buttonIndex);
+	unsigned int selectedColorOfButton(int buttonIndex);
 };
 
 #endif
