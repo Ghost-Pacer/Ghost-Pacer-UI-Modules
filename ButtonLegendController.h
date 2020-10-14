@@ -5,9 +5,17 @@
 
 class ButtonLegendController {
 public:
+	// ButtonLegendController Constructor
 	ButtonLegendController(int spacing, CPVRTPrint3D *print3D);
+
+	// ButtonLegendController Destructor
 	~ButtonLegendController();
+
+	// Renders button legend on screen
 	void render();
+
+	// Sets the button at the given index with either its
+	// selected or deselected color
 	void setButtonIsEnabled(int buttonIndex, bool enabled);
 private:
 	const char *UP_BUTTON = "~";
