@@ -5,7 +5,7 @@
 
 class ButtonLegendController {
 public:
-	ButtonLegendController(int spacing, float scale, CPVRTPrint3D *print3D);
+	ButtonLegendController(int spacing, CPVRTPrint3D *print3D);
 	~ButtonLegendController();
 	void render();
 	void setButtonIsEnabled(int buttonIndex, bool enabled);
@@ -17,6 +17,9 @@ private:
 	const unsigned int DOWN_BUTTON_SELECTED_COLOR = 0xFFFF0000;
 	const unsigned int OK_BUTTON_SELECTED_COLOR = 0xFF00FF00;
 	const unsigned int UNSELECTED_COLOR = 0x99999999;
+	const float SCALE = 0.9;
+	const float X_RELATIVE_CENTER_COORDINATE = 90.0;
+	const float Y_RELATIVE_CENTER_COORDINATE = 88.0;
 
 	vector<Print2D::AttributedText> legendItemsAttributedText;
 	int itemSpacing;

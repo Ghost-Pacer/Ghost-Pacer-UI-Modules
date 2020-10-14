@@ -1,12 +1,12 @@
 #include "ButtonLegendController.h"
 #include <iostream>
 
-ButtonLegendController::ButtonLegendController(int spacing, float scale, CPVRTPrint3D *print3D) {
+ButtonLegendController::ButtonLegendController(int spacing, CPVRTPrint3D *print3D) {
 	const int BUTTON_COUNT = 3;
 	for (int ii = 0; ii < BUTTON_COUNT; ii++) {
 		Print2D::AttributedText attributedText;
 		attributedText.color = UNSELECTED_COLOR;
-		attributedText.scale = scale;
+		attributedText.scale = SCALE;
 		attributedText.text = stringRepresentationOfButton(ii);
 		legendItemsAttributedText.push_back(attributedText);
 	}
@@ -20,8 +20,6 @@ ButtonLegendController::~ButtonLegendController() {
 }
 
 void ButtonLegendController::render() {
-	const float X_RELATIVE_CENTER_COORDINATE = 88.0;
-	const float Y_RELATIVE_CENTER_COORDINATE = 88.0;
 	print2D->renderVerticalMenuCenteredAt(X_RELATIVE_CENTER_COORDINATE, Y_RELATIVE_CENTER_COORDINATE, itemSpacing, legendItemsAttributedText);
 }
 
