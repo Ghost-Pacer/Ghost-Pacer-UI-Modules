@@ -8,17 +8,20 @@
 * RETURNS: ButtonLegendController instance
 * THROWS: None
 */
-ButtonLegendController::ButtonLegendController(int spacing, CPVRTPrint3D *print3D) {
+ButtonLegendController::ButtonLegendController(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D) {
     const int BUTTON_COUNT = 3;
     for (int ii = 0; ii < BUTTON_COUNT; ii++) {
         Print2D::AttributedText attributedText;
-        attributedText.color = UNSELECTED_COLOR;
+        attributedText.color = disabledButtonColor;
         attributedText.scale = SCALE;
         attributedText.text = stringRepresentationOfButton(ii);
         legendItemsAttributedText.push_back(attributedText);
     }
 
-    itemSpacing = spacing;
+    this->enabledNavigationButtonColor = enabledNavigationButtonColor;
+    this->enabledOkButtonColor = enabledOkButtonColor;
+    this->disabledButtonColor = disabledButtonColor;
+    this->spacing = spacing;
     print2D = new Print2D(print3D);
 }
 
@@ -39,7 +42,7 @@ ButtonLegendController::~ButtonLegendController() {
 * THROWS: None
 */
 void ButtonLegendController::render() {
-    print2D->renderVerticalMenuCenteredAt(X_RELATIVE_CENTER_COORDINATE, Y_RELATIVE_CENTER_COORDINATE, itemSpacing, legendItemsAttributedText);
+    print2D->renderVerticalMenuCenteredAt(X_RELATIVE_CENTER_COORDINATE, Y_RELATIVE_CENTER_COORDINATE, spacing, legendItemsAttributedText);
 }
 
 /**
@@ -53,7 +56,7 @@ void ButtonLegendController::setButtonIsEnabled(int buttonIndex, bool enabled) {
     const int BUTTON_COUNT = 3;
     if (buttonIndex < 0 || buttonIndex >= BUTTON_COUNT) { return; }
 
-    legendItemsAttributedText[buttonIndex].color = enabled ? selectedColorOfButton(buttonIndex) : UNSELECTED_COLOR;
+    legendItemsAttributedText[buttonIndex].color = enabled ? selectedColorOfButton(buttonIndex) : disabledButtonColor;
 }
 
 // ***** HELPER FUNCTIONS ****
@@ -85,12 +88,12 @@ char* ButtonLegendController::stringRepresentationOfButton(int buttonIndex) {
 unsigned int ButtonLegendController::selectedColorOfButton(int buttonIndex) {
     switch (buttonIndex) {
     case 0:
-        return UP_BUTTON_SELECTED_COLOR;
+        return enabledNavigationButtonColor;
     case 1:
-        return DOWN_BUTTON_SELECTED_COLOR;
+        return enabledNavigationButtonColor;
     case 2:
-        return OK_BUTTON_SELECTED_COLOR;
+        return enabledOkButtonColor;
     default:
-        return UNSELECTED_COLOR;
+        return disabledButtonColor;
     }
 }

@@ -6,7 +6,7 @@
 class ButtonLegendController {
 public:
     // ButtonLegendController Constructor
-    ButtonLegendController(int spacing, CPVRTPrint3D *print3D);
+    ButtonLegendController(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D);
 
     // ButtonLegendController Destructor
     ~ButtonLegendController();
@@ -21,16 +21,15 @@ private:
     const char *UP_BUTTON = "~";
     const char *DOWN_BUTTON = "`";
     const char *OK_BUTTON = "\\";
-    const unsigned int UP_BUTTON_SELECTED_COLOR = 0xFFFF0000;
-    const unsigned int DOWN_BUTTON_SELECTED_COLOR = 0xFFFF0000;
-    const unsigned int OK_BUTTON_SELECTED_COLOR = 0xFF00FF00;
-    const unsigned int UNSELECTED_COLOR = 0x99999999;
     const float SCALE = 0.9;
     const float X_RELATIVE_CENTER_COORDINATE = 90.0;
     const float Y_RELATIVE_CENTER_COORDINATE = 88.0;
 
     vector<Print2D::AttributedText> legendItemsAttributedText;
-    int itemSpacing;
+    unsigned enabledNavigationButtonColor;
+    unsigned enabledOkButtonColor;
+    unsigned disabledButtonColor;
+    int spacing;
     Print2D *print2D;
 
     char* stringRepresentationOfButton(int buttonIndex);
