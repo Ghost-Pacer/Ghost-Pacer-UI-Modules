@@ -15,6 +15,8 @@ BannerView::~BannerView() {
 }
 
 void BannerView::render() {
+    scaleToFitIfNeeded();
+
     switch (position) {
     case TOP:
         renderAtTopPosition();
@@ -32,11 +34,11 @@ void BannerView::renderAtTopPosition() {
 }
 
 BannerView::Coordinate BannerView::topPositionAbsoluteOriginCoordinate() {
-    Coordinate screenPixelDimensions = screenDimensions();
+    float screenWidth = screenDimensions().x;
     float bannerWidth = maxTextWidth();
 
     Coordinate absoluteOriginCoordinate;
-    absoluteOriginCoordinate.x = (screenPixelDimensions.x - bannerWidth) / 2;
+    absoluteOriginCoordinate.x = (screenWidth - bannerWidth) / 2;
     absoluteOriginCoordinate.y = TOP_PADDING_PIXELS;
 
     return absoluteOriginCoordinate;
@@ -52,6 +54,16 @@ BannerView::Coordinate BannerView::centerPositionRelativeCenterCoordinate() {
     relativeCenterCoordinate.x = 50.0f;
     relativeCenterCoordinate.y = 50.0f;
     return relativeCenterCoordinate;
+}
+
+void BannerView::scaleToFitIfNeeded() {
+    float screenWidth = screenDimensions().x;
+    float bannerWidth = maxTextWidth();
+    float safeAreaWidth = screenWidth - 2 * MAX_HORIZONTAL_PADDING_PIXELS;
+    if (bannerWidth > safeAreaWidth) {
+        float oversizeFactor = safeAreaWidth / bannerWidth;
+        this->scale = this->scale * oversizeFactor;
+    }
 }
 
 BannerView::Coordinate BannerView::screenDimensions() {

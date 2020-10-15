@@ -19,6 +19,7 @@ private:
     };
 
     const float TOP_PADDING_PIXELS = 20;
+    const float MAX_HORIZONTAL_PADDING_PIXELS = 20;
 
     vector<char*> bannerLinesText;
     Position position;
@@ -32,6 +33,7 @@ private:
     void renderAtCenterPosition();
     Coordinate topPositionAbsoluteOriginCoordinate();
     Coordinate centerPositionRelativeCenterCoordinate();
+    void scaleToFitIfNeeded();
     Coordinate screenDimensions();
     float maxTextWidth();
 };
