@@ -1,17 +1,17 @@
-#include "ButtonLegendController.h"
+#include "ButtonLegendView.h"
 #include <iostream>
 
 /**
-* DOES: Creates a new instance of ButtonLegendController class
+* DOES: Creates a new instance of ButtonLegendView class
 * PARAMS: enabledNavigationButtonColor - Color of up and down button glyphs when enabled
 *         enabledOkButtonColor - Color of ok button glyph when enabled
 *         disabledButtonColor - Color of button glyphs when disabled
 *         spacing - Spacing between button glyphs
 *         print3D - Pointer to an already set up CPVRTPrint3D object
-* RETURNS: ButtonLegendController instance
+* RETURNS: ButtonLegendView instance
 * THROWS: None
 */
-ButtonLegendController::ButtonLegendController(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D) {
+ButtonLegendView::ButtonLegendView(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D) {
     const int BUTTON_COUNT = 3;
     for (int ii = 0; ii < BUTTON_COUNT; ii++) {
         Print2D::AttributedText attributedText;
@@ -29,12 +29,12 @@ ButtonLegendController::ButtonLegendController(unsigned enabledNavigationButtonC
 }
 
 /**
-* DOES: Frees memory and destroys ButtonLegendController instance
+* DOES: Frees memory and destroys ButtonLegendView instance
 * PARAMS: None
 * RETURNS: None
 * THROWS: None
 */
-ButtonLegendController::~ButtonLegendController() {
+ButtonLegendView::~ButtonLegendView() {
     delete print2D;
 }
 
@@ -44,7 +44,7 @@ ButtonLegendController::~ButtonLegendController() {
 * RETURNS: None
 * THROWS: None
 */
-void ButtonLegendController::render() {
+void ButtonLegendView::render() {
     print2D->renderVerticalMenuCenteredAt(X_RELATIVE_CENTER_COORDINATE, Y_RELATIVE_CENTER_COORDINATE, spacing, legendItemsAttributedText);
 }
 
@@ -55,7 +55,7 @@ void ButtonLegendController::render() {
 * RETURNS: None
 * THROWS: None
 */
-void ButtonLegendController::setButtonIsEnabled(int buttonIndex, bool enabled) {
+void ButtonLegendView::setButtonIsEnabled(int buttonIndex, bool enabled) {
     const int BUTTON_COUNT = 3;
     if (buttonIndex < 0 || buttonIndex >= BUTTON_COUNT) { return; }
 
@@ -69,7 +69,7 @@ void ButtonLegendController::setButtonIsEnabled(int buttonIndex, bool enabled) {
 * RETURNS: String containing ASCII character corresponding to a button glyph
 * THROWS: None
 */
-char* ButtonLegendController::stringRepresentationOfButton(int buttonIndex) {
+char* ButtonLegendView::stringRepresentationOfButton(int buttonIndex) {
     switch (buttonIndex) {
     case 0:
         return const_cast<char*>(UP_BUTTON);
@@ -88,7 +88,7 @@ char* ButtonLegendController::stringRepresentationOfButton(int buttonIndex) {
 * RETURNS: Selected color of button in ABGR format
 * THROWS: None
 */
-unsigned int ButtonLegendController::selectedColorOfButton(int buttonIndex) {
+unsigned int ButtonLegendView::selectedColorOfButton(int buttonIndex) {
     switch (buttonIndex) {
     case 0:
         return enabledNavigationButtonColor;

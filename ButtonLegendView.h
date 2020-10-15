@@ -1,15 +1,15 @@
-#ifndef __BUTTON_LEGEND_CONTROLLER_H_
-#define __BUTTON_LEGEND_CONTROLLER_H_
+#ifndef __BUTTON_LEGEND_VIEW_H_
+#define __BUTTON_LEGEND_VIEW_H_
 
 #include "Print2D.h"
 
-class ButtonLegendController {
+class ButtonLegendView {
 public:
-    // ButtonLegendController Constructor
-    ButtonLegendController(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D);
+    // ButtonLegendView Constructor
+    ButtonLegendView(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D);
 
-    // ButtonLegendController Destructor
-    ~ButtonLegendController();
+    // ButtonLegendView Destructor
+    ~ButtonLegendView();
 
     // Renders button legend on screen
     void render();
@@ -21,9 +21,9 @@ private:
     const char *UP_BUTTON = "~";
     const char *DOWN_BUTTON = "`";
     const char *OK_BUTTON = "\\";
-    const float SCALE = 0.9;
-    const float X_RELATIVE_CENTER_COORDINATE = 90.0;
-    const float Y_RELATIVE_CENTER_COORDINATE = 88.0;
+    const float SCALE = 0.9f;
+    const float X_RELATIVE_CENTER_COORDINATE = 90.0f;
+    const float Y_RELATIVE_CENTER_COORDINATE = 88.0f;
 
     vector<Print2D::AttributedText> legendItemsAttributedText;
     unsigned enabledNavigationButtonColor;
