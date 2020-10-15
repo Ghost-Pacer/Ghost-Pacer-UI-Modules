@@ -8,10 +8,17 @@ using std::vector;
 
 class BannerView {
 public:
+    // Indicates whether BannerView should be centered within screen or pinned to top
     enum Position { TOP, CENTER };
 
+    // BannerView Constructor
     BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D);
+
+    // BannerView Destructor
     ~BannerView();
+
+    // Renders banner view on screen. 
+    // If provided scale is too large, text will scale to fit screen width.
     void render();
 private:
     struct Coordinate {

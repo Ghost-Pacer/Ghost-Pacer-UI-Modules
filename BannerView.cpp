@@ -1,6 +1,18 @@
 #include "BannerView.h"
 
-BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D* print3D) {
+/**
+* DOES: Creates a new instance of BannerView class
+* PARAMS: bannerLinesText - Lines of text to display. First element
+*         is displayed at the top, last element at the bottom.
+*         position - Whether banner should be centered or pinned to top
+*         spacing - Spacing between menu items
+*         scale - Size of menu item text
+*         color - Color of text
+*         print3D - Pointer to an already set up CPVRTPrint3D object
+* RETURNS: BannerView instance
+* THROWS: None
+*/
+BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D) {
     this->bannerLinesText = bannerLinesText;
     this->position = position;
     this->spacing = spacing;
@@ -10,10 +22,23 @@ BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spa
     this->print2D = new Print2D(print3D);
 }
 
+/**
+* DOES: Frees memory and destroys BannerView instance
+* PARAMS: None
+* RETURNS: None
+* THROWS: None
+*/
 BannerView::~BannerView() {
     delete print2D;
 }
 
+/**
+* DOES: Renders banner on screen.
+*       If scale is too large,text will scale to fit screen width
+* PARAMS: None
+* RETURNS: None
+* THROWS: None
+*/
 void BannerView::render() {
     scaleToFitIfNeeded();
 
@@ -28,11 +53,24 @@ void BannerView::render() {
 }
 
 // ***** HELPER FUNCTIONS *****
+
+/**
+* DOES: Renders banner pinned to top of screen
+* PARAMS: None
+* RETURNS: None
+* THROWS: None
+*/
 void BannerView::renderAtTopPosition() {
     Coordinate absoluteOriginCoordinate = topPositionAbsoluteOriginCoordinate();
     print2D->renderVerticalMenuAbsoluteOriginAt(absoluteOriginCoordinate.x, absoluteOriginCoordinate.y, scale, color, spacing, bannerLinesText);
 }
 
+/**
+* DOES: Calculates absolute origin coordinate of banner for its top position
+* PARAMS: None
+* RETURNS: Absolute origin coordinate of top positioned banner
+* THROWS: None
+*/
 BannerView::Coordinate BannerView::topPositionAbsoluteOriginCoordinate() {
     float screenWidth = screenDimensions().x;
     float bannerWidth = maxTextWidth();
@@ -44,11 +82,23 @@ BannerView::Coordinate BannerView::topPositionAbsoluteOriginCoordinate() {
     return absoluteOriginCoordinate;
 }
 
+/**
+* DOES: Renders banner centered within screen
+* PARAMS: None
+* RETURNS: None
+* THROWS: None
+*/
 void BannerView::renderAtCenterPosition() {
     Coordinate relativeCenterCoordinate = centerPositionRelativeCenterCoordinate();
     print2D->renderVerticalMenuCenteredAt(relativeCenterCoordinate.x, relativeCenterCoordinate.y, scale, color, spacing, bannerLinesText);
 }
 
+/**
+* DOES: Calculates relative center coordinate of banner for its center position
+* PARAMS: None
+* RETURNS: Relative center coordinate of center positioned banner
+* THROWS: None
+*/
 BannerView::Coordinate BannerView::centerPositionRelativeCenterCoordinate() {
     Coordinate relativeCenterCoordinate;
     relativeCenterCoordinate.x = 50.0f;
@@ -56,6 +106,13 @@ BannerView::Coordinate BannerView::centerPositionRelativeCenterCoordinate() {
     return relativeCenterCoordinate;
 }
 
+/**
+* DOES: If the scale factor provided when initializing BannerView instance is
+*       too large, recalculate the scale so the banner fits within the screen width
+* PARAMS: None
+* RETURNS: None
+* THROWS: None
+*/
 void BannerView::scaleToFitIfNeeded() {
     float screenWidth = screenDimensions().x;
     float bannerWidth = maxTextWidth();
@@ -66,6 +123,12 @@ void BannerView::scaleToFitIfNeeded() {
     }
 }
 
+/**
+* DOES: Reports the width and height of the screen
+* PARAMS: None
+* RETURNS: Coordinate containing the width and height of the screen
+* THROWS: None
+*/
 BannerView::Coordinate BannerView::screenDimensions() {
     unsigned int screenWidth;
     unsigned int screenHeight;
@@ -78,6 +141,12 @@ BannerView::Coordinate BannerView::screenDimensions() {
     return screenDimensions;
 }
 
+/**
+* DOES: Reports the width of the longest banner line
+* PARAMS: None
+* RETURNS: The width of the longest banner line found
+* THROWS: None
+*/
 float BannerView::maxTextWidth() {
     float maxWidth = 0;
     int size = bannerLinesText.size();

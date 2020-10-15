@@ -3,7 +3,10 @@
 
 /**
 * DOES: Creates a new instance of ButtonLegendController class
-* PARAMS: spacing - Spacing between button glyphs
+* PARAMS: enabledNavigationButtonColor - Color of up and down button glyphs when enabled
+*         enabledOkButtonColor - Color of ok button glyph when enabled
+*         disabledButtonColor - Color of button glyphs when disabled
+*         spacing - Spacing between button glyphs
 *         print3D - Pointer to an already set up CPVRTPrint3D object
 * RETURNS: ButtonLegendController instance
 * THROWS: None
