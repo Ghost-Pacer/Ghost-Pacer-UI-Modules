@@ -14,12 +14,26 @@ public:
     ~BannerView();
     void render();
 private:
+    struct Coordinate {
+        float x, y;
+    };
+
+    const float TOP_PADDING_PIXELS = 20;
+
     vector<char*> bannerLinesText;
     Position position;
-    int itemSpacing;
+    int spacing;
     float scale;
     unsigned int color;
+    CPVRTPrint3D *print3D;
     Print2D *print2D;
+
+    void renderAtTopPosition();
+    void renderAtCenterPosition();
+    Coordinate topPositionAbsoluteOriginCoordinate();
+    Coordinate centerPositionRelativeCenterCoordinate();
+    Coordinate screenDimensions();
+    float maxTextWidth();
 };
 
 #endif
