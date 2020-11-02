@@ -23,7 +23,7 @@ private:
     const char *OK_BUTTON = "\\";
     const float SCALE = 0.9f;
     const float X_RELATIVE_CENTER_COORDINATE = 90.0f;
-    const float Y_RELATIVE_CENTER_COORDINATE = 88.0f;
+    const float Y_RELATIVE_CENTER_COORDINATE = 82.0f;
 
     vector<Print2D::AttributedText> legendItemsAttributedText;
     unsigned enabledNavigationButtonColor;

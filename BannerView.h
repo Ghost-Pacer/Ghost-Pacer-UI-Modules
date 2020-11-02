@@ -25,7 +25,7 @@ private:
         float x, y;
     };
 
-    const float TOP_PADDING_PIXELS = 20;
+    const float TOP_PADDING_PIXELS = 100;
     const float MAX_HORIZONTAL_PADDING_PIXELS = 20;
 
     vector<char*> bannerLinesText;
