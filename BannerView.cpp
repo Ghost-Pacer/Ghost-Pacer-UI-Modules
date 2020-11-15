@@ -12,14 +12,15 @@
 * RETURNS: BannerView instance
 * THROWS: None
 */
-BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D) {
+BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D, bool rotated) {
     this->bannerLinesText = bannerLinesText;
     this->position = position;
     this->spacing = spacing;
     this->scale = scale;
     this->color = color;
     this->print3D = print3D;
-    this->print2D = new Print2D(print3D);
+    this->print2D = new Print2D(print3D, rotated);
+    this->rotated = rotated;
 }
 
 /**
@@ -135,8 +136,8 @@ BannerView::Coordinate BannerView::screenDimensions() {
     print3D->GetAspectRatio(&screenWidth, &screenHeight);
 
     Coordinate screenDimensions;
-    screenDimensions.x = screenWidth;
-    screenDimensions.y = screenHeight;
+    screenDimensions.x = !rotated ? screenWidth : screenHeight;
+    screenDimensions.y = !rotated ? screenHeight : screenWidth;
     
     return screenDimensions;
 }

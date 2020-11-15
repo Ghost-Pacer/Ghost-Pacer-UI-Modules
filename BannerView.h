@@ -12,7 +12,7 @@ public:
     enum Position { TOP, CENTER };
 
     // BannerView Constructor
-    BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D);
+    BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D, bool rotated);
 
     // BannerView Destructor
     ~BannerView();
@@ -35,6 +35,7 @@ private:
     unsigned int color;
     CPVRTPrint3D *print3D;
     Print2D *print2D;
+    bool rotated;
 
     void renderAtTopPosition();
     void renderAtCenterPosition();

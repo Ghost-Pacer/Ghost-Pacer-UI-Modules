@@ -25,7 +25,7 @@ ButtonLegendView::ButtonLegendView(unsigned enabledNavigationButtonColor, unsign
     this->enabledOkButtonColor = enabledOkButtonColor;
     this->disabledButtonColor = disabledButtonColor;
     this->spacing = spacing;
-    print2D = new Print2D(print3D);
+    print2D = new Print2D(print3D, true);
 }
 
 /**
