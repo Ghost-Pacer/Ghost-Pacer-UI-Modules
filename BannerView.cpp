@@ -19,7 +19,7 @@ BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spa
     this->scale = scale;
     this->color = color;
     this->print3D = print3D;
-    this->print2D = new Print2D(print3D, rotated);
+    this->print2D = new Print2D(print3D, isScreenRotated);
 }
 
 /**
