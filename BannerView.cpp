@@ -12,7 +12,7 @@
 * RETURNS: BannerView instance
 * THROWS: None
 */
-BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D, bool rotated) {
+BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spacing, float scale, unsigned int color, CPVRTPrint3D *print3D, bool isScreenRotated) {
     this->bannerLinesText = bannerLinesText;
     this->position = position;
     this->spacing = spacing;
@@ -20,7 +20,6 @@ BannerView::BannerView(vector<char*> bannerLinesText, Position position, int spa
     this->color = color;
     this->print3D = print3D;
     this->print2D = new Print2D(print3D, rotated);
-    this->rotated = rotated;
 }
 
 /**
@@ -73,7 +72,7 @@ void BannerView::renderAtTopPosition() {
 * THROWS: None
 */
 BannerView::Coordinate BannerView::topPositionAbsoluteOriginCoordinate() {
-    float screenWidth = screenDimensions().x;
+    float screenWidth = print2D->getScreenWidth();
     float bannerWidth = maxTextWidth();
 
     Coordinate absoluteOriginCoordinate;
@@ -115,31 +114,13 @@ BannerView::Coordinate BannerView::centerPositionRelativeCenterCoordinate() {
 * THROWS: None
 */
 void BannerView::scaleToFitIfNeeded() {
-    float screenWidth = screenDimensions().x;
+    float screenWidth = print2D->getScreenWidth();
     float bannerWidth = maxTextWidth();
     float safeAreaWidth = screenWidth - 2 * MAX_HORIZONTAL_PADDING_PIXELS;
     if (bannerWidth > safeAreaWidth) {
         float oversizeFactor = safeAreaWidth / bannerWidth;
         this->scale = this->scale * oversizeFactor;
     }
-}
-
-/**
-* DOES: Reports the width and height of the screen
-* PARAMS: None
-* RETURNS: Coordinate containing the width and height of the screen
-* THROWS: None
-*/
-BannerView::Coordinate BannerView::screenDimensions() {
-    unsigned int screenWidth;
-    unsigned int screenHeight;
-    print3D->GetAspectRatio(&screenWidth, &screenHeight);
-
-    Coordinate screenDimensions;
-    screenDimensions.x = !rotated ? screenWidth : screenHeight;
-    screenDimensions.y = !rotated ? screenHeight : screenWidth;
-    
-    return screenDimensions;
 }
 
 /**
