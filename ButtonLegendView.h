@@ -6,7 +6,7 @@
 class ButtonLegendView {
 public:
     // ButtonLegendView Constructor
-    ButtonLegendView(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D);
+    ButtonLegendView(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D, bool isScreenRotated);
 
     // ButtonLegendView Destructor
     ~ButtonLegendView();

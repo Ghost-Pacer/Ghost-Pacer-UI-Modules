@@ -11,7 +11,7 @@
 * RETURNS: ButtonLegendView instance
 * THROWS: None
 */
-ButtonLegendView::ButtonLegendView(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D) {
+ButtonLegendView::ButtonLegendView(unsigned enabledNavigationButtonColor, unsigned enabledOkButtonColor, unsigned disabledButtonColor, int spacing, CPVRTPrint3D *print3D, isScreenRotated) {
     const int BUTTON_COUNT = 3;
     for (int ii = 0; ii < BUTTON_COUNT; ii++) {
         Print2D::AttributedText attributedText;
@@ -25,7 +25,7 @@ ButtonLegendView::ButtonLegendView(unsigned enabledNavigationButtonColor, unsign
     this->enabledOkButtonColor = enabledOkButtonColor;
     this->disabledButtonColor = disabledButtonColor;
     this->spacing = spacing;
-    print2D = new Print2D(print3D, true);
+    print2D = new Print2D(print3D, isScreenRotated);
 }
 
 /**
