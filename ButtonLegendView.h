@@ -21,7 +21,7 @@ private:
     const char *UP_BUTTON = "~";
     const char *DOWN_BUTTON = "`";
     const char *OK_BUTTON = "\\";
-    const float SCALE = 0.9f;
+    const float SCALE = 0.7f;
     const float X_RELATIVE_CENTER_COORDINATE = 90.0f;
     const float Y_RELATIVE_CENTER_COORDINATE = 82.0f;
 
